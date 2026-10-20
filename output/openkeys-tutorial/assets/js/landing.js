@@ -1,0 +1,6 @@
+const navToggle=document.querySelector('.nav-toggle');const nav=document.querySelector('.site-nav');const header=document.querySelector('[data-header]');
+navToggle?.addEventListener('click',()=>{const open=navToggle.getAttribute('aria-expanded')==='true';navToggle.setAttribute('aria-expanded',String(!open));nav?.classList.toggle('open',!open)});
+nav?.querySelectorAll('a').forEach(link=>link.addEventListener('click',()=>{navToggle?.setAttribute('aria-expanded','false');nav.classList.remove('open')}));
+addEventListener('keydown',event=>{if(event.key==='Escape'){navToggle?.setAttribute('aria-expanded','false');nav?.classList.remove('open');navToggle?.focus()}});
+const updateHeader=()=>header?.classList.toggle('scrolled',scrollY>24);addEventListener('scroll',updateHeader,{passive:true});updateHeader();
+const reveals=[...document.querySelectorAll('.reveal')];if('IntersectionObserver'in window){const observer=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('visible');observer.unobserve(entry.target)}})},{threshold:.12,rootMargin:'0px 0px -40px'});reveals.forEach(element=>observer.observe(element))}else{reveals.forEach(element=>element.classList.add('visible'))}

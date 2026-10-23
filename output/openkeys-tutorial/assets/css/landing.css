@@ -26,10 +26,13 @@
 .sound-collection header b{padding:8px 10px;border:1px solid #354047;border-radius:999px;color:#8f999f;font:800 .62rem/1 ui-monospace,monospace;letter-spacing:.08em;white-space:nowrap}
 .red-piano{border-color:rgba(229,55,79,.38);background:radial-gradient(circle at 100% 0,rgba(229,55,79,.16),transparent 38%),linear-gradient(145deg,#1b171a,#0d1013)}
 .red-piano header span{color:#ff6278}.red-piano header b{border-color:rgba(229,55,79,.35);color:#dba1aa}
+.aneira{grid-column:1/-1;border-color:rgba(198,161,91,.4);background:radial-gradient(circle at 100% 0,rgba(198,161,91,.16),transparent 38%),linear-gradient(145deg,#1c1913,#0d1013)}
+.aneira header span{color:#e0bd75}.aneira header b{border-color:rgba(198,161,91,.4);color:#e0bd75}
 .sound-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));margin:0;padding:0;list-style:none}
 .sound-list li{display:grid;grid-template-columns:30px 1fr;align-items:center;gap:12px;min-height:66px;padding:13px 24px;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
 .sound-list li:nth-child(2n){border-right:0}.sound-list li:nth-last-child(-n+2){border-bottom:0}
 .sound-list span{color:#566068;font:700 .67rem/1 ui-monospace,monospace}.sound-list strong{font-size:.93rem;letter-spacing:-.01em}
+.sound-list a{display:flex;align-items:center;justify-content:space-between;gap:16px;color:var(--text);font-size:.93rem;font-weight:700;letter-spacing:-.01em;text-decoration:none}.sound-list a small{color:#e0bd75;font:800 .61rem/1 ui-monospace,monospace;letter-spacing:.08em;white-space:nowrap}.sound-list a:hover{color:#f2cf86}.sound-list a:focus-visible{outline-offset:3px}
 .red-piano .sound-list span{color:#9b515d}.red-piano .sound-list li:nth-last-child(2){border-bottom:1px solid var(--line)}.sound-library-note{margin:25px 0 0;color:#697279;font-size:.75rem;text-align:right}
 @media(max-width:980px){.sound-library-heading,.sound-collections{grid-template-columns:1fr}.sound-library-heading{gap:26px}.sound-library-heading>p{max-width:680px}.sound-collection{max-width:none}}
 @media(max-width:650px){.sound-library-heading{margin-bottom:38px}.sound-library-heading h2{font-size:2.9rem}.sound-collection header{padding:26px 22px}.sound-list{grid-template-columns:1fr}.sound-list li,.sound-list li:nth-child(2n),.sound-list li:nth-last-child(-n+2){border-right:0;border-bottom:1px solid var(--line)}.sound-list li:last-child{border-bottom:0}.sound-library-note{text-align:left}}

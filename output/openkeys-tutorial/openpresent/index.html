@@ -55,7 +55,7 @@
         <div class="or"><span>OR PASTE TEXT</span></div>
         <div class="paste-panel">
           <input id="draftTitle" class="title-input" value="Untitled presentation" aria-label="Presentation title">
-          <textarea id="pasteText" placeholder="Paste text here. Use markers like [Introduction], [Section 1], or [Conclusion] to create sections automatically."></textarea>
+          <textarea id="pasteText" placeholder="Paste text here. Start lines with [Verse], [Chorus], [Bridge], or another song-part marker to create sections automatically."></textarea>
           <button class="button primary" id="reviewPasteButton">Review text</button>
         </div>
         <input id="cameraInput" type="file" accept="image/*" capture="environment" hidden>
@@ -72,7 +72,7 @@
           <aside class="source-preview"><div class="source-preview-head"><b>Original</b><span id="pageStatus"></span></div><div id="sourceCanvasWrap" class="canvas-wrap"><div class="empty-preview">Your imported page will appear here.</div></div></aside>
           <section class="review-panel">
             <label>Presentation title<input id="reviewTitle" class="title-input"></label>
-            <div class="review-help"><span>Formatting preserved</span><p>Check headings, spacing, and line breaks. Bracketed headings become presentation sections.</p></div>
+            <div class="review-help"><span>Song parts recognized</span><p>Markers such as [Verse], [Chorus 2], [Pre-Chorus], and [Bridge] become presentation sections.</p></div>
             <textarea id="reviewText" spellcheck="true"></textarea>
             <div class="review-actions"><button class="button" id="rescanButton">Choose another source</button><button class="button primary" id="createSlidesButton">Create slides →</button></div>
           </section>

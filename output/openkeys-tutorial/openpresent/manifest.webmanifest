@@ -8,7 +8,7 @@
   "display_override": ["window-controls-overlay", "standalone"],
   "background_color": "#070707",
   "theme_color": "#070707",
-  "orientation": "landscape",
+  "orientation": "portrait",
   "icons": [
     { "src": "icons/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
   ]

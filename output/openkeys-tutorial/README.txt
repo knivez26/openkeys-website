@@ -14,5 +14,6 @@ Files:
 - assets/js: navigation, search, reading progress, and interactions
 - assets/screenshots: captured OpenKeys interface images
 - downloads: downloadable OpenPresent installer package
+- openpresent: complete installable OpenPresent PWA, served from openkeys.pro/openpresent/
 
 GitHub Pages publishes this folder through .github/workflows/pages.yml. CNAME configures the production domain as openkeys.pro.

@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#070707">
+  <meta name="description" content="Turn scanned pages into clear, browser-based presentations.">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icons/icon.svg">
+  <link rel="stylesheet" href="app.css">
+  <title>OpenPresent</title>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <button class="brand" id="homeButton" aria-label="Open home">
+        <span class="brand-mark">OP</span>
+        <span><b>OpenPresent</b><small>SCAN → SECTION → PRESENT</small></span>
+      </button>
+      <div class="top-actions">
+        <span class="save-state" id="saveState">Saved locally</span>
+        <button class="button quiet" id="installButton" hidden>Install app</button>
+      </div>
+    </header>
+
+    <main>
+      <section class="view active" id="homeView">
+        <div class="home-hero">
+          <p class="eyebrow">LOCAL-FIRST PRESENTATION MAKER</p>
+          <h1>From paper to presentation.</h1>
+          <p>Scan a page, review the text, and turn sections into bold, readable slides—all from your browser.</p>
+          <div class="hero-actions">
+            <button class="button primary" id="newScanButton">Scan or import</button>
+            <button class="button" id="newBlankButton">Start with text</button>
+          </div>
+          <div class="privacy-note"><span>●</span> Your projects stay on this device. OCR assets download only when first used.</div>
+        </div>
+        <div class="projects-panel">
+          <div class="section-heading"><div><p class="eyebrow">LIBRARY</p><h2>Your presentations</h2></div><button class="icon-button" id="clearProjects" title="Delete all projects">Clear</button></div>
+          <div class="project-grid" id="projectGrid"></div>
+        </div>
+      </section>
+
+      <section class="view" id="importView">
+        <div class="workspace-head">
+          <button class="back-button" data-go="home">← Library</button>
+          <div><p class="eyebrow">STEP 1 OF 3</p><h1>Bring in your text</h1></div>
+        </div>
+        <div class="import-grid">
+          <button class="source-card" id="cameraButton"><span class="source-icon">⌁</span><b>Scan with camera</b><small>Photograph a printed or digital page</small></button>
+          <button class="source-card" id="imageButton"><span class="source-icon">▧</span><b>Import image</b><small>Choose a screenshot, PNG, or JPEG</small></button>
+          <button class="source-card" id="pdfButton"><span class="source-icon">PDF</span><b>Import PDF</b><small>Read up to the first 12 pages</small></button>
+        </div>
+        <div class="or"><span>OR PASTE TEXT</span></div>
+        <div class="paste-panel">
+          <input id="draftTitle" class="title-input" value="Untitled presentation" aria-label="Presentation title">
+          <textarea id="pasteText" placeholder="Paste text here. Use markers like [Introduction], [Section 1], or [Conclusion] to create sections automatically."></textarea>
+          <button class="button primary" id="reviewPasteButton">Review text</button>
+        </div>
+        <input id="cameraInput" type="file" accept="image/*" capture="environment" hidden>
+        <input id="imageInput" type="file" accept="image/png,image/jpeg,image/webp,image/heic" hidden>
+        <input id="pdfInput" type="file" accept="application/pdf" hidden>
+      </section>
+
+      <section class="view" id="ocrView">
+        <div class="workspace-head">
+          <button class="back-button" data-go="import">← Import</button>
+          <div><p class="eyebrow">STEP 2 OF 3</p><h1>Review your text</h1></div>
+        </div>
+        <div class="ocr-layout">
+          <aside class="source-preview"><div class="source-preview-head"><b>Original</b><span id="pageStatus"></span></div><div id="sourceCanvasWrap" class="canvas-wrap"><div class="empty-preview">Your imported page will appear here.</div></div></aside>
+          <section class="review-panel">
+            <label>Presentation title<input id="reviewTitle" class="title-input"></label>
+            <div class="review-help"><span>Formatting preserved</span><p>Check headings, spacing, and line breaks. Bracketed headings become presentation sections.</p></div>
+            <textarea id="reviewText" spellcheck="true"></textarea>
+            <div class="review-actions"><button class="button" id="rescanButton">Choose another source</button><button class="button primary" id="createSlidesButton">Create slides →</button></div>
+          </section>
+        </div>
+      </section>
+
+      <section class="view" id="editorView">
+        <div class="editor-top">
+          <button class="back-button" data-go="home">← Library</button>
+          <input id="projectTitle" class="project-title-input" aria-label="Presentation title">
+          <div class="editor-actions"><button class="button quiet" id="addSlideButton">+ Slide</button><button class="button" id="exportButton">Export HTML</button><button class="button primary" id="presentButton">Present</button></div>
+        </div>
+        <div class="editor-shell">
+          <aside class="slide-rail" id="slideRail"></aside>
+          <section class="stage-panel">
+            <div class="stage-toolbar">
+              <div class="toolbar-group"><label>Size<select id="fontSize"><option value="30">Small</option><option value="38" selected>Medium</option><option value="48">Large</option><option value="60">Extra large</option></select></label></div>
+              <div class="toolbar-group segmented"><button id="alignLeft" title="Align left">≡</button><button id="alignCenter" title="Align center">≣</button><button id="alignRight" title="Align right">≡</button></div>
+              <div class="toolbar-group"><label>Position<select id="verticalAlign"><option value="start">Top</option><option value="center" selected>Center</option><option value="end">Bottom</option></select></label></div>
+              <button class="danger-link" id="deleteSlideButton">Delete slide</button>
+            </div>
+            <div class="stage-wrap"><div class="slide-stage" id="slideStage"><input id="slideHeading" placeholder="Slide heading"><textarea id="slideBody" placeholder="Type slide text…"></textarea><span class="slide-number" id="slideNumber"></span></div></div>
+            <div class="mobile-editor-tabs"><button class="active" data-mobile-panel="slides">Slides</button><button data-mobile-panel="text">Text</button><button data-mobile-panel="design">Design</button></div>
+          </section>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div class="processing" id="processing" hidden><div class="processing-card"><div class="spinner"></div><p class="eyebrow">READING YOUR DOCUMENT</p><h2 id="processingTitle">Recognizing text…</h2><p id="processingDetail">Preparing OCR</p><div class="progress"><span id="progressBar"></span></div><button class="button quiet" id="cancelOcr">Cancel</button></div></div>
+  <div class="toast" id="toast" role="status"></div>
+  <div class="presentation" id="presentation" hidden><button class="present-exit" id="exitPresentation">Exit</button><div class="present-slide" id="presentSlide"><h1></h1><div></div><span></span></div><button class="present-nav prev" id="presentPrev" aria-label="Previous slide">‹</button><button class="present-nav next" id="presentNext" aria-label="Next slide">›</button></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/tesseract.js@6.0.1/dist/tesseract.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

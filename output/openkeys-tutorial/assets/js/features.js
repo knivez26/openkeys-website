@@ -14,7 +14,7 @@
     const terms = normalize(search.value.trim()).split(/\s+/).filter(Boolean);
     let visible = 0;
     entries.forEach(entry => {
-      const matches = (selected === 'all' || entry.dataset.access === selected)
+      const matches = (selected === 'all' || entry.dataset.access.split(' ').includes(selected))
         && terms.every(term => content.get(entry).includes(term));
       entry.hidden = !matches;
       if (matches) {
@@ -23,7 +23,9 @@
       }
     });
     buttons.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.filter === selected)));
-    status.textContent = `${visible} of ${entries.length} feature groups${terms.length ? ' match your search' : ' shown'}`;
+    const listed = entries.filter(entry => !entry.hidden)
+      .reduce((sum, entry) => sum + Number(entry.dataset.featureCount || 0), 0);
+    status.textContent = `${listed} listed capabilities across ${visible} of ${entries.length} feature groups${terms.length ? ' matching your search' : ''}`;
     empty.hidden = visible !== 0;
   }
 

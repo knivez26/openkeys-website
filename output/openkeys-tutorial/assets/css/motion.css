@@ -59,11 +59,11 @@
 .tour-progress{width:min(240px,30vw);height:3px;border-radius:3px;background:rgba(255,255,255,.1);overflow:hidden;margin-bottom:12px}
 .tour-progress b{display:block;height:100%;width:100%;transform-origin:0 50%;transform:scaleX(var(--tour,0));background:linear-gradient(90deg,var(--red),var(--cyan))}
 .tour-track{display:flex;gap:clamp(18px,2.4vw,36px);padding:0 max(24px,calc((100vw - var(--max))/2));width:max-content;will-change:transform;transform:translate3d(var(--tx,0),0,0)}
-.tour-slide{flex:0 0 auto;width:min(62vw,880px);margin:0;display:grid;gap:18px;opacity:.38;transform:scale(.94);transition:opacity .6s var(--ease-out),transform .8s var(--ease-out)}
+.tour-slide{flex:0 0 auto;width:min(62vw,880px,calc((100vh - 360px) * 1.5));margin:0;display:grid;gap:18px;opacity:.38;transform:scale(.94);transition:opacity .6s var(--ease-out),transform .8s var(--ease-out)}
 .tour-slide.is-active{opacity:1;transform:none}
 .tour-shot{position:relative;padding:7px;border-radius:20px;background:linear-gradient(145deg,#2f343a,#0e1114);border:1px solid #3e444b;box-shadow:0 40px 90px rgba(0,0,0,.6);overflow:hidden}
 .tour-shot:after{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(120deg,rgba(255,255,255,.10),transparent 35%);pointer-events:none}
-.tour-shot img{display:block;width:100%;height:auto;max-height:46vh;object-fit:cover;object-position:top;border-radius:14px}
+.tour-shot img{display:block;width:100%;height:auto;aspect-ratio:3/2;object-fit:contain;background:#050607;border-radius:14px}
 .tour-slide figcaption{display:grid;grid-template-columns:minmax(150px,auto) 1fr;gap:4px 28px;align-items:baseline}
 .tour-slide figcaption span{grid-row:span 2;color:var(--cyan);font-size:.74rem;font-weight:900;letter-spacing:.16em;text-transform:uppercase}
 .tour-slide h3{margin:0;font-size:clamp(1.25rem,2vw,1.7rem);line-height:1.15}
@@ -85,10 +85,23 @@
 .device-screen img:not(:first-child){position:absolute;inset:0;height:100%;object-fit:cover}
 .device-screen img:not(.active){opacity:0}
 .device-screen img.active{transform:scale(1)}
+.device.iphone .device-screen{aspect-ratio:2.17}
+.device.iphone .device-screen img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 100%}
+.device{transition:transform .9s var(--ease-out),box-shadow 1s var(--ease-io)}
+[data-active-theme="darchrow"] .device{box-shadow:0 0 0 2px #15181c,0 50px 110px rgba(0,0,0,.6),0 0 80px rgba(60,150,255,.22)}
+[data-active-theme="theredpiano"] .device{box-shadow:0 0 0 2px #15181c,0 50px 110px rgba(0,0,0,.6),0 0 80px rgba(229,55,79,.24)}
+.theme-switch{position:relative;z-index:3;display:flex;justify-content:center;gap:8px;margin:28px auto 0;width:max-content;padding:5px;border-radius:999px;background:rgba(11,13,15,.06);border:1px solid rgba(11,13,15,.1)}
+.theme-switch button{display:inline-flex;align-items:center;gap:8px;border:0;border-radius:999px;padding:9px 16px;background:transparent;color:#41474c;font:800 .78rem/1 Inter,ui-sans-serif,system-ui,sans-serif;letter-spacing:.06em;cursor:pointer;transition:background .4s var(--ease-out),color .3s}
+.theme-switch button i{width:10px;height:10px;border-radius:50%;background:#3c96ff}
+.theme-switch button[data-set-theme="theredpiano"] i{background:var(--red)}
+.theme-switch button[aria-pressed="true"]{background:#0b0d0f;color:#fff}
+.theme-switch button:focus-visible{outline:2px solid #167c7a;outline-offset:2px}
+.float-phone.theme-darchrow figcaption i{background:#3c96ff;box-shadow:0 0 10px #3c96ff}
+.float-pads figcaption i{background:var(--red);box-shadow:0 0 10px var(--red)}
 
 /* Screen card / features parallax + spotlight */
 .screen-card{overflow:hidden}
-.screen-card img{transform:translate3d(0,var(--par,0),0) scale(1.08);transition:transform .2s linear}
+.screen-card img{display:block;width:100%;height:auto;transform:translate3d(0,var(--par,0),0) scale(1.08);transition:transform .2s linear}
 .feature-card{position:relative;transition:transform .5s var(--ease-out),border-color .4s}
 .feature-card:before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .4s;background:radial-gradient(420px circle at var(--mx,50%) var(--my,50%),rgba(85,227,223,.12),transparent 45%)}
 .feature-card:hover:before{opacity:1}

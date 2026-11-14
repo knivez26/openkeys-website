@@ -60,6 +60,27 @@
     });
   });
 
+  /* Theme stage: iPad and iPhone show opposite themes; switch or auto-cycle. */
+  document.querySelectorAll('[data-theme-stage]').forEach(stage => {
+    const wrap = stage.parentElement;
+    const buttons = [...wrap.querySelectorAll('[data-set-theme]')];
+    const themes = buttons.map(b => b.dataset.setTheme);
+    let current = themes[0], timer = null;
+    const apply = theme => {
+      current = theme;
+      wrap.dataset.activeTheme = theme;
+      const other = themes.find(t => t !== theme) || theme;
+      const [ipad, phone] = stage.querySelectorAll('.device-screen');
+      ipad?.querySelectorAll('img').forEach(img => img.classList.toggle('active', img.dataset.theme === theme));
+      phone?.querySelectorAll('img').forEach(img => img.classList.toggle('active', img.dataset.theme === other));
+      buttons.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.setTheme === theme)));
+    };
+    const cycle = () => { if (!document.hidden) apply(themes[(themes.indexOf(current) + 1) % themes.length]); };
+    buttons.forEach(b => b.addEventListener('click', () => { clearInterval(timer); timer = null; apply(b.dataset.setTheme); }));
+    apply(current);
+    if (!reduce.matches && themes.length > 1) timer = setInterval(cycle, 4500);
+  });
+
   /* Crossfading device screens. */
   if (!reduce.matches) document.querySelectorAll('[data-cycle]').forEach((screen, n) => {
     const imgs = [...screen.querySelectorAll('img')];

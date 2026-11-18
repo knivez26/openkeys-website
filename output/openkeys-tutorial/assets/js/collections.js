@@ -7,7 +7,8 @@
   const time = value => Number.isFinite(value) ? `${Math.floor(value / 60)}:${String(Math.floor(value % 60)).padStart(2, '0')}` : '--:--';
 
   chapters.forEach(chapter => {
-    const name = chapter.dataset.collection === 'darchrow' ? 'Darchrow' : 'Zero';
+    const names = { darchrow: 'Darchrow', zero: 'Zero', glass: 'Glass & Reverse Glass' };
+    const name = names[chapter.dataset.collection];
     const audio = chapter.querySelector('[data-preview]');
     const controls = chapter.querySelector('.preview-controls');
     const play = chapter.querySelector('[data-play]');
